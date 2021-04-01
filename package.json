@@ -1,0 +1,33 @@
+{
+  "name": "full-stack-server",
+  "version": "1.0.0",
+  "description": "Backend for Bazaar Shodai",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Porgramming-Hero-web-course/full-stack-server-wickedaf.git"
+  },
+  "keywords": [
+    "Bazaar",
+    "Shodai"
+  ],
+  "author": "Shahriar Emon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Porgramming-Hero-web-course/full-stack-server-wickedaf/issues"
+  },
+  "homepage": "https://github.com/Porgramming-Hero-web-course/full-stack-server-wickedaf#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
