@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
+const ObjectId = require('mongodb').ObjectID;
 require('dotenv').config();
 
 const app = express();
@@ -24,10 +25,10 @@ app.get('/', (req, res) => {
 
 client.connect(err => {
   const itemsCollection = client.db("bazaarShodai").collection("items");
+  const cartCollection = client.db("bazaarShodai").collection("cart");
     
   app.post('/addItem', (req, res) => {
         const reqBody = req.body;
-        console.log(reqBody);
         itemsCollection.insertOne(reqBody)
         .then(result => {
         console.log(result.insertedCount);
@@ -40,6 +41,28 @@ client.connect(err => {
         res.send(documents);
       })
 
+  })
+
+  app.get('/userCart', (req, res) => {
+    cartCollection.find({'user.email': req.query.mail})
+    .toArray((err, documents) => {
+      res.send(documents);
+    })
+})
+
+  app.post('/addCart', (req, res) => {
+    cartCollection.insertOne(req.body)
+    .then(result => {
+      console.log(result.insertedCount);
+      res.send(result.insertedCount > 0);
+    })
+  })
+
+  app.delete('/deleteItem/:id', (req,res) => {
+    itemsCollection.findOneAndDelete({_id: ObjectId(req.params.id)})
+    .then(result => {
+      res.send(!!result.ok > 0 );
+    })
   })
   console.log('Database Connected:', client.isConnected());
 //   client.close();
